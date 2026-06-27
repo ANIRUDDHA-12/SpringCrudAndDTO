@@ -18,4 +18,14 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ex.getMessage(),HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(DoctorNotFoundException.class)
+    public ResponseEntity<String> DoctorNotFoundException(DoctorNotFoundException ex){
+        return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<String> MethodArgumentNotValidException(MethodArgumentNotValidException ex){
+        return new ResponseEntity<>("Invalid input data for the following method",HttpStatus.BAD_REQUEST);
+    }
+
 }
