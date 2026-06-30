@@ -70,9 +70,7 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public List<Order> getOrdersByEmail(String email){
-        return orderRepository.findOrdersByEmail(email);
-    }
+
     public List<Order> getOrderByStatus(String status){
         return orderRepository.findByStatus(status);
     }

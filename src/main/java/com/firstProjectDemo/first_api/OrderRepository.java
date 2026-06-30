@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order,Integer> {
 
-     List<Order> findOrdersByEmail(String email);
+
     List<Order> findByStatus(String status);
 }

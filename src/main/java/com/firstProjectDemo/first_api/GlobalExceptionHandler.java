@@ -28,4 +28,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>("Invalid input data for the following method",HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(ProjectNotFoundException.class )
+        public ResponseEntity<String> ProjectNotFoundException(ProjectNotFoundException ex){
+            return new ResponseEntity<>("The said relevant project not found",HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(BudgetExceededException.class)
+        public ResponseEntity<String> BudgetExceededException(BudgetExceededException ex){
+            return new ResponseEntity<>("Budget exceeded for a particular project",HttpStatus.PAYMENT_REQUIRED);
+        }
+
+
+
 }

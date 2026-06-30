@@ -15,7 +15,8 @@ import lombok.Setter;
 public class Patient {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Column(nullable = false)
     private String name;

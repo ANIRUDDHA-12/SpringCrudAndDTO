@@ -2,10 +2,11 @@ package com.firstProjectDemo.first_api;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 public record PatientRequestDTO(
 
-        @Column(nullable = false)
+        @NotBlank
         String patientName,
 
         @Min(1)

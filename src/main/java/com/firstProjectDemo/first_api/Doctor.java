@@ -2,6 +2,7 @@ package com.firstProjectDemo.first_api;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,14 +18,15 @@ import java.util.List;
 public class Doctor {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    @Column(nullable = false)
+    @NotBlank
     private String name;
 
-    @Column(nullable = false)
+    @NotBlank
     private String department;
 
-    @OneToMany(mappedBy = "patient_id", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "doctor", cascade=CascadeType.ALL)
     List<Patient> patientList;
 }

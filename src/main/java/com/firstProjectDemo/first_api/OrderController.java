@@ -38,11 +38,11 @@ public class OrderController {
 
     }
 
-    @GetMapping("/customer")
-    public ResponseEntity<List<Order>> findOrdersByEmail(@RequestParam String email){
-       List<Order> orders= orderService.getOrdersByEmail(email);
-       return ResponseEntity.ok(orders);
-    }
+//    @GetMapping("/customer")
+//    public ResponseEntity<List<Order>> findOrdersByEmail(@RequestParam String email){
+//       List<Order> orders= orderService.getOrdersByEmail(email);
+//       return ResponseEntity.ok(orders);
+//    }
 
     @GetMapping("/status")
     public ResponseEntity<List<Order>> findByStatus(@RequestParam String status){
