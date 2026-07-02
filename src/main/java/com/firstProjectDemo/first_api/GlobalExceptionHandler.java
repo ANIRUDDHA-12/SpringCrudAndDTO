@@ -38,6 +38,10 @@ public class GlobalExceptionHandler {
             return new ResponseEntity<>("Budget exceeded for a particular project",HttpStatus.PAYMENT_REQUIRED);
         }
 
+    @ExceptionHandler(WalletNotFoundException.class)
+    public ResponseEntity<String> WalletNotFoundException(WalletNotFoundException ex){
+        return new ResponseEntity<>("Wallet not found",HttpStatus.NOT_FOUND);
+    }
 
 
 }
