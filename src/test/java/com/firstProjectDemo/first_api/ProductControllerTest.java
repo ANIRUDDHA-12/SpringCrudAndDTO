@@ -1,16 +1,19 @@
 package com.firstProjectDemo.first_api;
 
 
-import org.junit.jupiter.api.MediaType;
+//import org.junit.jupiter.api.MediaType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.http.MediaType;
+//import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.ObjectMapper;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -31,17 +34,17 @@ public class ProductControllerTest {
         ProductRequestDTO productRequestDTO= new ProductRequestDTO("Laptop",789.67);
         String result =  objectMapper.writeValueAsString(productRequestDTO);
 
-        when(productService.createProduct(productRequestDTO)).thenReturn("New Product saved");
+        when(productService.createProduct(any(ProductRequestDTO.class))).thenReturn("New Product saved");
 
         mockMvc.perform(post("/api/products")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(result)
+                .content(result))
                 .andExpect(status().isCreated())
-                .andExpect(content().string("Product laptop saved"));
+                .andExpect(content().string("New Product saved"));
     }
 
     @Test
-    public void addProduct_InvalidInput_ReturnsBadRequest(){
+    public void addProduct_InvalidInput_ReturnsBadRequest() throws Exception{
         ProductRequestDTO invalidDto = new ProductRequestDTO("", -50.0);
         String jsonString = objectMapper.writeValueAsString(invalidDto);
 

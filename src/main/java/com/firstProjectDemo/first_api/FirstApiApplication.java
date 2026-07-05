@@ -13,9 +13,9 @@ import org.springframework.web.client.RestClient;
 import java.util.TimeZone;
 
 @SpringBootApplication
-@EnableAsync
-@EnableCaching
-@EnableScheduling
+//@EnableAsync
+//@EnableCaching
+//@EnableScheduling
 
 public class FirstApiApplication {
 
