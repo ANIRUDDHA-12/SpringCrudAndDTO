@@ -26,7 +26,5 @@ public class MathUtilsTests {
     void testDivide(){
         MathUtils mathUtils=new MathUtils();
         assertThrows(ArithmeticException.class,()->mathUtils.divide(1,0),"Divide by 0 should throw");
-
-
     }
 }
