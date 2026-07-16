@@ -10,17 +10,18 @@ import java.util.Optional;
 @Service
 public class AccountService {
     private final AccountRepository accountRepository;
+//    private final IdempotencyKeyId idempotencyKeyId;
     private final IdempotencyRecordRepository idempotencyRecordRepository;
-    private final IdempotencyKeyId idempotencyKeyId;
+
 
     public AccountService(AccountRepository accountRepository,
-                          IdempotencyRecordRepository idempotencyRecordRepository,
-                          IdempotencyKeyId idempotencyKeyId
+                          IdempotencyRecordRepository idempotencyRecordRepository
+//                          IdempotencyKeyId idempotencyKeyId
 
     ){
         this.accountRepository=accountRepository;
         this.idempotencyRecordRepository=idempotencyRecordRepository;
-        this.idempotencyKeyId=idempotencyKeyId;
+//        this.idempotencyKeyId=idempotencyKeyId;
     }
 
     // if something goes wrong between the in_progress and success ,then the best handling of error would be getting the cause of why and what went wrong which can be confirmed through the try catch block here which would catch the exception if any at all
@@ -85,5 +86,15 @@ public class AccountService {
 
         accountRepository.save(from);
         accountRepository.save(to);
+    }
+
+    public Optional<BigDecimal> fetchBalance(String username,String accountId){
+        if(username==null || accountId==null || username.trim().isEmpty()){
+            return Optional.empty();
+
+        }
+        return accountRepository.
+                fetchBalance(username.trim(), accountId)
+                .map(Account::getBalance);
     }
 }
