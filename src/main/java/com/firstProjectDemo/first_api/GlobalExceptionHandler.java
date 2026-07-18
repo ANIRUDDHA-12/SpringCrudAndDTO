@@ -43,5 +43,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>("Wallet not found",HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(BookUnavailableException.class)
+    public ResponseEntity<String> BookUnavailableException(BookUnavailableException ex){
+        return new ResponseEntity<>("Book not found",HttpStatus.BAD_REQUEST);
+    }
+
 
 }

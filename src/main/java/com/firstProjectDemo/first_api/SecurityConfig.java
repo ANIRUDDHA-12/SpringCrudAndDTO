@@ -34,14 +34,24 @@ public class SecurityConfig {
         return http
                 .csrf(o->o.disable())
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()))
-                .authorizeHttpRequests(auth->auth.requestMatchers("/v1/api/accounts/**").permitAll()
-                        .requestMatchers("/h2-console/**").permitAll()
+                .authorizeHttpRequests(auth->auth.requestMatchers("/v1/api/accounts/**","/h2-console/**","/api/borrow/**","/error").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .httpBasic(Customizer.withDefaults())
                 .build();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService(){
+        UserDetails user=User.builder()
+                .username("some")
+                .password("{noop}password123")
+                .roles("Admin")
+                .build();
+
+        return new InMemoryUserDetailsManager(user);
     }
 
 //    @Bean
